@@ -1,0 +1,105 @@
+🔍 Research Summary: How Chatbots Work
+Today, I researched how chatbots function by visiting multiple websites. Based on my findings, chatbots can be developed in two ways:
+
+✅ 1. With Code (Custom Chatbot):
+Uses HTML, CSS, JavaScript (often with frameworks like React).
+
+Backend logic with Node.js, Python, etc.
+
+Gives full control over UI/UX and features.
+
+Can integrate APIs (like OpenAI, Dialogflow).
+
+✅ 2. Without Code (No-code Platforms):
+Tools like Tidio, ManyChat, Chatfuel.
+
+Drag-and-drop flows.
+
+Easy integration into websites via embed scripts.
+
+Limited customization but quicker setup.
+
+
+
+
+💡 Core Features a Chatbot Should Have:
+Text-based communication
+
+Emoji support
+
+File attachment (images/docs)
+
+Typing indicator (thinking dots)
+
+Bot and user avatars
+
+Send button & input box
+
+Scroll/chat history
+
+Responsive & styled layout
+
+
+
+
+
+
+
+
+
+
+
+🧪 Today’s Implementation Work:
+✅ Chatbot UI Created With HTML + CSS:
+Header with bot logo and name.
+
+Message area with scrollable chat history.
+
+Message input with styling.
+
+Custom fonts added: Inter, Raleway.
+
+Thinking indicator with animation.
+
+Send button appears only when input is valid.
+
+Focus state styling for better UI/UX.
+
+✅ Emoji Attachment Implementation (In Progress):
+Tried implementing emoji picker and sending emojis.
+
+Emoji not fully functional yet (sending part incomplete).
+
+Plan: Add emoji button → open picker → append emoji to input field.
+
+🧑‍🎨 CSS Styling Highlights:
+Background gradient for better aesthetics.
+
+Rounded borders and shadows for clean card layout.
+
+Distinct colors for user and bot messages.
+
+Hover effects for buttons.
+
+📌 Next Steps:
+Complete emoji send functionality.
+
+Add file attachment support.
+
+Integrate basic bot logic for replies.
+
+Add responsiveness for smaller devices.
+
+Refactor JavaScript (if any used) for message rendering.
+
+📁 External Resources Used:
+Google Fonts
+
+Material Symbols
+
+Research from: ChatGPT, YouTube tutorials, Medium articles.
+
+
+
+ Final Note
+I’m still working on completing full functionality. Meanwhile, I’ve learned a lot about how chatbots can be created both with and without code, how important UI is, and how to approach new features step-by-step.
