@@ -103,3 +103,126 @@ Research from: ChatGPT, YouTube tutorials, Medium articles.
 
  Final Note
 I’m still working on completing full functionality. Meanwhile, I’ve learned a lot about how chatbots can be created both with and without code, how important UI is, and how to approach new features step-by-step.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Chatbot Implementation Documentation
+Today's Learning Summary
+Key Features Implemented:
+Google Gemini API Integration
+
+Used the free version of Gemini API for text and image processing
+
+Implemented API calls to generate responses to user queries
+
+Handled both text messages and image attachments
+
+Emoji Picker Functionality
+
+Added emoji-mart library for emoji selection
+
+Implemented click-to-insert emoji feature in the message input
+
+Created toggle functionality to show/hide emoji picker
+
+File Attachment System
+
+Added ability to upload images
+
+Implemented preview of attached images
+
+Added cancel button to remove attachments
+
+Step-by-Step Implementation:
+Chatbot UI Structure
+
+Created toggle button to show/hide chatbot
+
+Designed header with logo and close button
+
+Built message display area with scrolling
+
+Implemented footer with input field and controls
+
+Message Handling
+
+Set up outgoing message creation with user avatar
+
+Added "thinking" animation for bot responses
+
+Implemented smooth scrolling to new messages
+
+API Integration
+
+Configured API request options
+
+Handled response parsing and error cases
+
+Formatted bot responses by removing markdown syntax
+
+Special Features
+
+File upload with preview and cancel option
+
+Emoji picker integration
+
+Responsive design for mobile devices
+
+Challenges Faced:
+API Limitations
+
+Free version has usage limits causing occasional overloads
+
+Cannot fetch data from external URLs
+
+Sometimes slow response times
+
+Testing Observations
+
+Works well for text analysis (word/letter counting)
+
+Handles basic Q&A effectively
+
+Image processing works but with some limitations
+
+Key Learnings:
+Frontend Development
+
+Improved skills in creating interactive UI elements
+
+Learned about smooth animations and transitions
+
+Gained experience with responsive design
+
+API Integration
+
+Understood how to structure API requests
+
+Learned to handle different response formats
+
+Gained experience with error handling
+
+Feature Implementation
+
+Learned to implement emoji pickers
+
+Gained experience with file upload handling
+
+Improved understanding of chat interfaces

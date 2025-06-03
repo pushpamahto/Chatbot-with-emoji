@@ -8,18 +8,24 @@ const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 const fileCancelButton = document.querySelector("#file-cancel");
 // -------------------------------------------------------------------------
 
+const chatbotToggler = document.querySelector("#chatbot-toggler");
+const closeChatbot = document.querySelector("#close-chatbot");
+
+// ----------- Api setup--------------------
 const API_KEY = "AIzaSyCND8_k9nMfIrl8OhpVAYXoMGwh7dlR3Xs"
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 const userData = {
     message: null,
-    // for file attach
+    //-------- for file attach----------
     file: {
         data: null,
         mime_type: null
     }
+    // ------------------------------
 }
 
+const initialInputHeight = messageInput.scrollHeight;
 
 const createMessageElement = (content, ...classes) => {
     const div = document.createElement("div");
@@ -89,6 +95,7 @@ const handleOutgoingMessage = (e) => {
     // ---------------for attach file -------------------
 
      fileUploadWrapper.classList.remove("file-uploaded");
+     messageInput.dispatchEvent(new Event ("input"));
 
      const messageContent= `<div class="message-text"></div>
                             ${userData.file.data ? `<img src="data:${userData.file.mime_type};base64,
@@ -128,11 +135,18 @@ const handleOutgoingMessage = (e) => {
 
 messageInput.addEventListener("keydown", (e) => {
     const userMessage = e.target.value.trim();
-    if(e.key === "Enter" && userMessage) {
+    if(e.key === "Enter" && userMessage && !e.shiftKey && window.innerWidth > 768) {
         
          handleOutgoingMessage(e);
         
     }
+});
+
+messageInput.addEventListener("input", () => {
+    messageInput.style.height = `${initialInputHeight}px`;
+    messageInput.style.height = `${messageInput.scrollHeight}px`;
+    document.querySelector(".chat-form").style.borderRadius = messageInput.scrollHeight >
+    initialInputHeight ? "15px" : "32px";
 });
 
 // file attach --------------------------------------------------------------//
@@ -196,7 +210,13 @@ sendMessageButton.addEventListener("click", (e) => handleOutgoingMessage(e));
 
 
 // file attach 
-document.querySelector("#file-upload").addEventListener("click", () => fileInput.click())
+document.querySelector("#file-upload").addEventListener("click", () => fileInput.click());
+
+chatbotToggler.addEventListener("click", () => document.body.classList.toggle
+("show-chatbot"));
+
+closeChatbot.addEventListener("click", () => document.body.classList.remove
+("show-chatbot"));
 
 
 
@@ -226,44 +246,3 @@ document.querySelector("#file-upload").addEventListener("click", () => fileInput
 
 
 
-
-
-// const chatBody = document.querySelector(".chat-body");
-// const messageInput = document.querySelector(".message-input");
-// const chatForm = document.querySelector(".chat-form");
-
-// const createMessageElement = (content, classes) => {
-//     const div = document.createElement("div");
-//     div.classList.add("message", classes);
-//     div.innerHTML = content;
-//     return div;
-// }
-
-// const handleOutgoingMessage = (userMessage) => {
-//     const messageContent = `<div class="message-text">${userMessage}</div>`;
-//     const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
-//     chatBody.appendChild(outgoingMessageDiv);
-//     chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll to bottom
-// }
-
-// // Handle form submission
-// chatForm.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const userMessage = messageInput.value.trim();
-//     if (userMessage) {
-//         handleOutgoingMessage(userMessage);
-//         messageInput.value = "";
-//     }
-// });
-
-// // Handle Enter key (but allow Shift+Enter for new lines)
-// messageInput.addEventListener("keydown", (e) => {
-//     if (e.key === "Enter" && !e.shiftKey) {
-//         e.preventDefault();
-//         const userMessage = messageInput.value.trim();
-//         if (userMessage) {
-//             handleOutgoingMessage(userMessage);
-//             messageInput.value = "";
-//         }
-//     }
-// });
