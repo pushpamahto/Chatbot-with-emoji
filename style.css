@@ -16,6 +16,9 @@ body{
     background: linear-gradient(#eeefd8, #feffc5);
 }
 
+
+
+
 /* chatbot toggler */
 #chatbot-toggler {
     position: fixed;
@@ -23,13 +26,17 @@ body{
     right: 35px;
     border: none;
     height: 50px;
+    width: 50px; 
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border-radius: 50%;
-   background: rgb(154, 131, 2);    /* not working*/
-   transition: all 0.2s ease;
+    background-color: rgb(154, 131, 2); /* Changed from background to background-color */
+    transition: all 0.2s ease;
+    z-index: 999; /* Ensure it stays above other elements */
+    padding: 0; /* Remove any default padding */
+    outline: none; /* Remove focus outline */
 }
 
 body.show-chatbot #chatbot-toggler {
@@ -37,23 +44,32 @@ body.show-chatbot #chatbot-toggler {
 }
 
 #chatbot-toggler span {
-    
-    border-radius: 50%;
-    color: rgb(137, 137, 2); 
+    color: rgb(247, 249, 197); /* Changed from rgb(137, 137, 2) to white for better visibility */
     position: absolute;
-    
+    font-size: 24px; /* Added font size for better visibility */
+    transition: all 0.2s ease;
 }
 
-
-
-body.show-chatbot #chatbot-toggler span:first-child,
+/* Hide the close icon by default */
 #chatbot-toggler span:last-child {
     opacity: 0;
+    visibility: hidden;
+}
+
+/* Show close icon when chatbot is visible */
+body.show-chatbot #chatbot-toggler span:first-child {
+    opacity: 0;
+    visibility: hidden;
 }
 
 body.show-chatbot #chatbot-toggler span:last-child {
     opacity: 1;
+    visibility: visible;
 }
+
+
+
+
 
 .chatbot-popup{
     position: fixed;
@@ -333,46 +349,70 @@ body.show-chatbot .chatbot-popup {
 }
 
 
-
 /* --- for attach file------------ */
-
 .chat-form .file-upload-wrapper {
     height: 35px;
     width: 35px;
     position: relative;
 }
 
-.chat-form .file-upload-wrapper :where(img, button) {
+.chat-form .file-upload-wrapper img,
+.chat-form .file-upload-wrapper button {
     position: absolute;
-
-}
-
-.chat-form .file-upload-wrapper img {
-    
-    /* display: none; */
     width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: 50%;
 }
 
-
-.chat-form .file-upload-wrapper #file-cancel {
-    color:#ff0000;
-    background: #fff;
-}
-
-
-.chat-form .file-upload-wrapper :where(img, #file-cancel),
-.chat-form .file-upload-wrapper .file-uploaded #file-upload {
+.chat-form .file-upload-wrapper img {
+    object-fit: cover;
     display: none;
 }
 
+.chat-form .file-upload-wrapper #file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: rgb(162, 139, 7);
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+.chat-form .file-upload-wrapper #file-upload:hover{
+    background:rgb(246, 235, 174) ;
+}
 
-.chat-form .file-upload-wrapper .file-uploaded img,
-.chat-form .file-upload-wrapper .file-uploaded :hover #file-cancel {
+.chat-form .file-upload-wrapper #file-cancel {
+    display: none;
+    background: #fff;
+    color: #ff0000;
+    font-size: 1.15rem;
+}
+
+/* When file is uploaded */
+.chat-form .file-upload-wrapper.file-uploaded img {
     display: block;
 }
+
+.chat-form .file-upload-wrapper.file-uploaded #file-upload {
+    display: none;
+}
+
+.chat-form .file-upload-wrapper.file-uploaded:hover #file-cancel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* for emoji picker */
@@ -392,6 +432,92 @@ body.show-emoji-picker em-emoji-picker {
     visibility: visible;
 
 }
+
+
+
+/* 3 dot css */
+/* Add this to your CSS file */
+.chat-header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+#menu-toggler {
+    border: none;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    background: none;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu-toggler:hover {
+    background: rgb(197, 171, 23);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 45px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    width: 160px;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+    color: rgb(154, 131, 2);
+}
+
+.dropdown-item:active {
+    background: #eee;
+}
+
+
+
+
+/* for chat history */
+
+
+
+
+
+
+
+
 
 
 
