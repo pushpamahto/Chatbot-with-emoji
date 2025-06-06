@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:wght@100..900&display=swap');
 
-
 * {
     margin: 0;
     padding: 0;
@@ -9,44 +8,40 @@
 }
 
 body{
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     min-height: 100vh;
     background: linear-gradient(#eeefd8, #feffc5);
 }
 
-
-
-
-/* chatbot toggler */
+/* Chatbot Toggler */
 #chatbot-toggler {
     position: fixed;
     bottom: 30px;
     right: 35px;
     border: none;
     height: 50px;
-    width: 50px; 
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border-radius: 50%;
-    background-color: rgb(154, 131, 2); /* Changed from background to background-color */
+    background-color: rgb(154, 131, 2);
     transition: all 0.2s ease;
-    z-index: 999; /* Ensure it stays above other elements */
-    padding: 0; /* Remove any default padding */
-    outline: none; /* Remove focus outline */
+    z-index: 999;
+    padding: 0;
+    outline: none;
 }
 
-body.show-chatbot #chatbot-toggler {
+/* MODIFIED: Rotate toggler when either form or chat is open */
+body.show-chatbot #chatbot-toggler,
+body.show-user-form #chatbot-toggler {
     transform: rotate(90deg);
 }
 
 #chatbot-toggler span {
-    color: rgb(247, 249, 197); /* Changed from rgb(137, 137, 2) to white for better visibility */
+    color: rgb(247, 249, 197);
     position: absolute;
-    font-size: 24px; /* Added font size for better visibility */
+    font-size: 24px;
     transition: all 0.2s ease;
 }
 
@@ -56,21 +51,92 @@ body.show-chatbot #chatbot-toggler {
     visibility: hidden;
 }
 
-/* Show close icon when chatbot is visible */
-body.show-chatbot #chatbot-toggler span:first-child {
+/* MODIFIED: Show close icon when either form or chat is open */
+body.show-chatbot #chatbot-toggler span:first-child,
+body.show-user-form #chatbot-toggler span:first-child {
     opacity: 0;
     visibility: hidden;
 }
 
-body.show-chatbot #chatbot-toggler span:last-child {
+body.show-chatbot #chatbot-toggler span:last-child,
+body.show-user-form #chatbot-toggler span:last-child {
     opacity: 1;
     visibility: visible;
 }
 
+/* NEW: User Info Form Popup */
+.user-info-popup {
+    position: fixed;
+    right: 35px;
+    bottom: 90px;
+    width: 420px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 15px;
+    opacity: 0;
+    transform: scale(0.2);
+    transform-origin: bottom right;
+    pointer-events: none;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transition: all 0.2s ease-in-out;
+    z-index: 998;
+}
 
+body.show-user-form .user-info-popup {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
 
+#user-info-form {
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
 
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
 
+.form-field label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.form-field input {
+    padding: 12px;
+    border: 1px solid #CCCCE5;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-field input:focus {
+    outline: none;
+    border-color: rgb(154, 131, 2);
+}
+
+#user-info-submit {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(154, 131, 2);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+#user-info-submit:hover {
+    background-color: rgb(177, 151, 2);
+}
+
+/* Main Chatbot Popup */
 .chatbot-popup{
     position: fixed;
     right: 35px;
@@ -83,8 +149,8 @@ body.show-chatbot #chatbot-toggler span:last-child {
     transform: scale(0.2);
     transform-origin: bottom right;
     pointer-events: none;
-     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-     transition: all 0.1s ease;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transition: all 0.1s ease;
 }
 
 body.show-chatbot .chatbot-popup {
@@ -123,7 +189,9 @@ body.show-chatbot .chatbot-popup {
     font-weight: 600;
 }
 
-.chat-header #close-chatbot{
+/* This targets the close button in BOTH the user form and chatbot header */
+.chat-header #close-chatbot,
+.user-info-popup .chat-header #close-chatbot { /* Added for consistency if you add a close button */
     border: none;
     color: #fff;
     height: 40px;
@@ -138,7 +206,6 @@ body.show-chatbot .chatbot-popup {
 }
 
 .chat-header #close-chatbot:hover{
-    /* background:#3d39ac; */
     background:rgb(197, 171, 23);
 }
 
@@ -154,25 +221,22 @@ body.show-chatbot .chatbot-popup {
     scrollbar-color: rgb(205, 194, 133) transparent;
 }
 
- 
 .chat-body .message{
     display: flex;
     gap: 11px;
     align-items: center;
 }
 
-.chat-body .bot-message  .bot-avatar{
-     height: 35px;
+.chat-body .bot-message .bot-avatar{
+    height: 35px;
     width: 35px;
     padding: 6px;
     fill: #fff;
     flex-shrink: 0;
     margin-bottom: 2px;
-    /* background: #5350C4; */
     background: rgb(154, 131, 2);;
     align-self: flex-end;
     border-radius: 50%;
-
 }
 
 .chat-body .user-message{
@@ -180,14 +244,10 @@ body.show-chatbot .chatbot-popup {
     align-items: flex-end;
 }
 
-
-
-
 .chat-body .message .message-text{
     padding: 12px 16px;
     max-width: 75%;
     font-size: 0.95rem;
-    
 }
 
 .chat-body .bot-message.thinking .message-text{
@@ -202,21 +262,15 @@ body.show-chatbot .chatbot-popup {
 .chat-body .user-message .message-text{
     background: rgb(154, 131, 2);
     color: #fff;
-    border-radius: 13px 13px 13px 3px;
+    border-radius: 13px 13px 3px 13px; /* Corrected for user message bubble */
 }
-
-
 
 /* for attach file */
 .chat-body .user-message .attachment{
     width: 50%;
     margin-top: -7px;
     border-radius: 13px 3px 13px 13px;
-
 }
-
-
-
 
 .chat-body .bot-message .thinking-indicator{
     display: flex;
@@ -229,9 +283,8 @@ body.show-chatbot .chatbot-popup {
     width: 7px;
     opacity: 0.9;
     border-radius: 50%;
-    background:rgb(154, 131, 2); 
+    background:rgb(154, 131, 2);
     animation:dotPulse 1.8s ease-in-out infinite;
-
 }
 
 .chat-body .bot-message .thinking-indicator .dot:nth-child(1) {
@@ -250,19 +303,14 @@ body.show-chatbot .chatbot-popup {
     0%, 44% {
         transform: translateY(0);
     }
-
     28% {
         opacity: 0.4;
         transform: translateY(-4px);
     }
-
-     44% {
+    44% {
         opacity: 0.2;
-        
     }
-
 }
-
 
 .chat-footer{
     position: absolute;
@@ -283,9 +331,7 @@ body.show-chatbot .chatbot-popup {
 
 .chat-footer .chat-form:focus-within {
     outline: 2px solid rgb(154, 131, 2);
-
 }
-
 
 .chat-form .message-input{
     border: none;
@@ -304,7 +350,6 @@ body.show-chatbot .chatbot-popup {
 
 .chat-form .message-input:hover {
     scrollbar-color: #f4f3ce transparent;
-
 }
 
 .chat-form .chat-controls{
@@ -323,9 +368,30 @@ body.show-chatbot .chatbot-popup {
     font-size: 1.15rem;
     cursor: pointer;
     color: rgb(162, 139, 7);
-   background: none;
+    background: none;
     border-radius: 50%;
     transition: 0.2s ease;
+}
+
+.chat-form .chat-controls #voice-assist {
+    color: rgb(162, 139, 7);
+}
+
+.chat-form .chat-controls #voice-assist.listening {
+    color: #ff0000;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
 }
 
 .chat-form .chat-controls #send-message {
@@ -340,14 +406,11 @@ body.show-chatbot .chatbot-popup {
 
 .chat-form .chat-controls #send-message:hover {
     background:rgb(177, 151, 2) ;
-
 }
 
 .chat-form .chat-controls button:hover{
-     background: rgb(246, 235, 174);
-    
+    background: rgb(246, 235, 174);
 }
-
 
 /* --- for attach file------------ */
 .chat-form .file-upload-wrapper {
@@ -405,38 +468,24 @@ body.show-chatbot .chatbot-popup {
     justify-content: center;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* for emoji picker */
-
 em-emoji-picker {
     position: absolute;
     left: 50%;
-    top: -337px;
+    bottom: 60px; /* Adjusted position */
     width: 100%;
     max-width: 350px;
     max-height: 330px;
     visibility: hidden;
     transform: translateX(-50%);
+    z-index: 10;
 }
 
 body.show-emoji-picker em-emoji-picker {
     visibility: visible;
-
 }
 
-
-
 /* 3 dot css */
-/* Add this to your CSS file */
 .chat-header .header-actions {
     display: flex;
     align-items: center;
@@ -506,31 +555,140 @@ body.show-emoji-picker em-emoji-picker {
     background: #eee;
 }
 
+/* Chat History Sidebar */
+.chat-history-sidebar {
+    position: fixed;
+    top: 14%;
+    right: -900px; /* Hidden by default */
+    margin-right: 2.5%;
+    height: 60%;
+    width: 300px;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 998;
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
 
+body.show-chat-history .chat-history-sidebar {
+    right: 0; /* Show sidebar */
+}
 
+.chat-history-sidebar .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgb(154, 131, 2);
+    color: #fff;
+    border-radius: 20px 20px 0 0; /* Match parent border-radius */
+}
 
-/* for chat history */
+.chat-history-sidebar .sidebar-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
 
+.chat-history-sidebar .sidebar-header #close-history {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
 
+.chat-history-sidebar .sidebar-header #close-history:hover {
+    background: rgb(197, 171, 23);
+}
 
+.chat-history-sidebar .history-list {
+    list-style: none;
+    padding: 10px 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(205, 194, 133) transparent;
+}
 
+.chat-history-sidebar .history-list li {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.chat-history-sidebar .history-list li:hover {
+    background: #f2efcb;
+}
 
+.chat-history-sidebar .history-list li:last-child {
+    border-bottom: none;
+}
 
+.chat-history-sidebar .history-list .chat-title {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: #333;
+}
 
+.chat-history-sidebar .history-list .delete-chat-item {
+    background: none;
+    border: none;
+    color: #ff0000;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.chat-history-sidebar .history-list .delete-chat-item:hover {
+    background: #ffe6e6;
+}
 
+.chat-history-sidebar .delete-history-button {
+    background: rgb(255, 99, 71); /* Tomato color */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    width: calc(100% - 40px); /* Adjust for padding */
+    margin: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.chat-history-sidebar .delete-history-button:hover {
+    background: rgb(220, 50, 30);
+}
 
-/*   -----------media query--------- */
-
+/*-----------media query--------- */
 @media (max-width:520px) {
     #chatbot-toggler {
         right: 20px;
         bottom: 20px;
     }
 
-    .chatbot-popup {
+    .chatbot-popup,
+    .user-info-popup { /* Apply to both popups */
         right: 0;
         bottom: 0;
         height: 100%;
@@ -553,5 +711,13 @@ body.show-emoji-picker em-emoji-picker {
 
     .chat-form .file-upload-wrapper.file-uploaded #file-cancel {
         opacity: 0;
+    }
+
+    .chat-history-sidebar {
+        width: 100%; /* Full width on smaller screens */
+        height: 100%;
+        top: 0;
+        margin-right: 0;
+        border-radius: 0;
     }
 }
